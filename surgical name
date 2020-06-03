@@ -10,10 +10,6 @@ data.loc[:,["검사번호"]]
 
 data["surg"]=0
 
-
-SugID1_list=[]
-SugID2_list=[]
-pt_split=[]
 name=[]
 f=open('SHB Slide scan list 2012 final coding1.csv','r',encoding='utf-8')
 #f=pd.read_csv('SHB Slide scan list 2012 final coding.csv','r',encoding='utf-8')
