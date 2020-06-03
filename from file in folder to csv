@@ -1,0 +1,35 @@
+import os # file path, 운영 체제와 관련된 작업을 할때
+import glob # directory 안에 있는 file 들을 list 목록 가지고 올때
+import numpy as np  # 행렬 계산시
+import pandas as pd # dataframe  다룰때 씀
+
+path_list = []
+filename_list = []
+sergical_id_list = []
+staining_list = []
+for x in glob.glob('씨젠2020.~05/**/*.mrxs', recursive=True): # 순환,재귀 폴더 안으로 들어가서 다 읽으라는 뜻
+    filename=os.path.splitext(os.path.basename(x))[0]
+
+    filename_split = filename.split(' ')
+
+    if len(filename_split) == 2 :
+        year, _id = filename.split(' ')
+        staining = ''
+    elif len(filename_split) == 3 :
+        year, _id, staining = filename.split(' ')
+
+    elif len(filename_split) == 4 :
+        year, _id, staining, etc = filename.split(' ')
+        staining = staining + ' ' + etc
+    else:
+        print('Unexpected ERROR')
+        break
+
+    path_list.append(x)
+    filename_list.append(filename)
+    sergical_id_list.append(year+ ' ' +_id)
+    staining_list.append(staining)
+
+data=np.concatenate(([path_list],[filename_list],[sergical_id_list],[staining_list]),axis=0).transpose(1,0)
+data=pd.DataFrame(data,columns = ['path','filename','id','staining'])
+data.to_csv('seegen_2019.csv',index=False,encoding='utf-8') 
