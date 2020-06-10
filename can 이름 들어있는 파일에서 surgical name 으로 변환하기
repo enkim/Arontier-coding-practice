@@ -1,0 +1,22 @@
+# scan 이름 들어있는 파일에서 surgical name 으로 변환하기# 
+
+import os
+import numpy as np
+import pandas as pd
+import csv
+
+data1=pd.read_csv('a.csv',encoding='utf-8') #진단지 Excel
+data2=pd.read_csv('b.csv',encoding='utf-8') #scan Excel
+
+rdr=data2.loc[:,["ScanNum"]].values #Value 로 하면 list 형태가 됨.  ScanNum으로 이름된 열에 해당하는 데이터를 열로 출력
+
+idx=0
+for line in rdr:
+    scan=line[0]
+    newscan=scan.replace('2020S','2020-S')
+    newscan1=newscan[0:14]
+
+    data2.loc[idx,"surg"]=newscan1
+    idx=idx+1
+
+data2.to_csv("c.csv",encoding="utf-8")
