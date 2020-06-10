@@ -1,0 +1,10 @@
+import pandas as pd
+import csv
+data1=pd.read_csv('a.csv',encoding='utf-8')
+data3=pd.read_csv('c.csv',encoding='utf-8')
+
+datam=pd.merge(data1,data3,how='left',on='PathNum')
+datam
+datam.to_csv("d.csv",encoding="utf-8")
+
+
