@@ -1,6 +1,8 @@
 # scan 이름 들어있는 파일에서 surgical name 으로 변환하기# 
 
 import os
+os.chdir("/Users/osejin/Dropbox/1entemp") # Spyder 로 실행하는 경우 
+
 import numpy as np
 import pandas as pd
 import csv
