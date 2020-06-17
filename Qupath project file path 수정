@@ -1,0 +1,8 @@
+import os
+os.chdir("/Users/Kimeunna/Dropbox/python") # Spyder 로 실행하는 경우 
+new_f = open('project5.qpproj','w')
+print(new_f)
+with open('project.qpproj') as f:
+    a=f.read().replace('TOSHIBA EXT 2','TOSHIBA EXT 1')
+    new_f.write(a)
+new_f.close()
