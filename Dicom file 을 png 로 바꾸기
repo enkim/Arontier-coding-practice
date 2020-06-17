@@ -22,4 +22,7 @@ mritopng.convert_file(file_list[1],'/Users/Kimeunna/Dropbox/아론ᄐ�
 
 # Convert a whole folder recursively
 mritopng.convert_folder('SRS00000/','/Users/Kimeunna/Dropbox/아론티어/test0/') 
-                        
+
+# 폴더 안에 있는 파일 모두 옮기기 for 문을 써서.  
+for i in [’SRS00001’,’SRS00002’]:
+    mritopng.convert_folder(i,’C:/users/arontier/desktop/{}/‘.format(i))
