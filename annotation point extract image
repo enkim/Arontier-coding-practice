@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jun 22 13:14:38 2020
+
+@author: Kimeunna
+"""
+
+from PIL import Image
+import openslide
+import os
+import cv2
+
+os.chdir("/Users/Kimeunna/Dropbox/아론티어/abnormal chromosome/ex")
+
+f=open("12-S -091120-1.txt",'r',encoding='UTF-8')
+
+xylist=[]
+index=0
+for row in f:
+    if '/Volumes' in row: 
+        wsi_path=row
+        #print(wsi_path)
+        slide = openslide.OpenSlide('wsi_path')
+        continue
+    
+    elif '[Point:' in row: 
+        xy=row.split(', Point:')[0]
+        xynum= xy.split(': ')[1]
+        
+        xloc=int(round(float(xynum.split(',')[0])))
+        yloc=int(round(float(xynum.split(',')[1])))
+        xyloc=(xloc,yloc)
+       
+        image=slide.read_region(xyloc,0,(780,960))
+        image.save(f'{index}.png')
+        xylist.append(xyloc)
+        index=index+1 
+        
+    else: 
+        continue
+print(xylist)
