@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Jun 22 13:14:38 2020
-
 @author: Kimeunna
 """
 
@@ -12,16 +11,14 @@ import os
 import cv2
 
 os.chdir("/Users/Kimeunna/Dropbox/아론티어/abnormal chromosome/ex")
-
+slide = openslide.OpenSlide('12-S -091120-1.mrxs')
 f=open("12-S -091120-1.txt",'r',encoding='UTF-8')
 
 xylist=[]
 index=0
 for row in f:
     if '/Volumes' in row: 
-        wsi_path=row
-        #print(wsi_path)
-        slide = openslide.OpenSlide('wsi_path')
+        #wsi_path=row
         continue
     
     elif '[Point:' in row: 
@@ -40,3 +37,4 @@ for row in f:
     else: 
         continue
 print(xylist)
+© 2020 GitHub, Inc.
