@@ -1,0 +1,13 @@
+import os 
+
+os.chdir("/Volumes/TOSHIBA EXT/placenta_result_0625/result/seegeneasan")
+path = "./"
+file_list = os.listdir(path)
+
+os.chdir("/Volumes/TOSHIBA EXT/placenta_result_0625/eval")
+
+import pandas as pd
+data=file_list 
+
+df=pd.DataFrame(data)
+df.to_csv("file_list.csv",header=False,index=False)
