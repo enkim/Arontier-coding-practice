@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jul  6 14:23:12 2020
+
+@author: Kimeunna
+"""
+
+
+import os 
+os.chdir('/Users/Kimeunna/Dropbox/1_p16')
+
+import pandas as pd
+
+leep=pd.read_csv('leep.csv',encoding="utf-8")
+p16=pd.read_csv('p16.csv',encoding="utf-8")
+
+print(leep.head())
+print(p16.head())
+print(leep.tail())
+print(p16.tail())
+
+
+
+leep_merge=leep.merge(p16,left_on='paid',right_on='paid')
+
+
+leep_merge_oddt=pd.merge(left=leep,right=p16,how='left',\
+                         on=['paid','oddt'],sort=False)
+
+print(leep_merge.head())
+
+leep_merge_oddt.to_csv("leep_p16_oddt.csv",encoding="utf-8")
+
+
+
