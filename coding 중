@@ -1,0 +1,93 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This is a temporary script file.
+"""
+
+import os
+os.chdir("/Users/Kimeunna/Dropbox/Python_ex/opencv_ex")
+
+
+import matplotlib.pyplot as plt
+import numpy as np 
+import cv2
+img=cv2.imread('12-S -091120-1.mrxs')[:,:,[2,1,0]]
+print(img)
+img.shape
+plt.imshow(img)
+plt.show()
+
+
+from skimage import io
+photo=io.imread('12-S -091120-1.mrxs')
+type(photo)
+photo.shape
+
+photo1=io.imread('1.png')
+photo1.shape
+
+
+from PIL import Image
+img3=Image.open("1.png")
+img_array=np.array(img3)
+
+
+### Openslide 용법 ############
+import openslide
+slide=openslide.OpenSlide('12-S -091120-1.mrxs')
+slide.detect_format('12-S -091120-1.mrxs') #format vendor of specified file 
+slide.level_count # number of levels in the slide resolution 
+slide.dimensions # !!!  list of tupues, (width, height)
+slide.level_dimensions # level 에 따른 dimension 임 
+slide.level_dimensions[0] # level 이 0인 경우 dimension 이 나옴. 이게 가장 고해상도 
+slide.level_downsamples #A list of downsample factors for each level of the slide.? 
+# Typical level : level3 or 4 
+
+slide.properties # Metadata about the slide 
+slide.associated_images #Images, such as label or macro images, which are associated with this slide.  
+slide.get_thumbnail((1024,1024)) #thumnail 로 만들기 parameter 는 size tup
+
+
+### Read_Region ### 
+#read_region(location, level, size)¶  
+# location(tuple) : (x,y) top left 가 level0 refernece frame 이 됨
+# level(int) : the level number
+# size(tuple) :(width,height) : region size 가 됨!!!!!!!! 
+image1=slide.read_region((21595, 199595),0,(1024,1024))
+
+# polygon 안의 점 값을 list 로 해서 read region 안의 (x,y) tupule 에 반복적으로 
+# 넣으면 될듯 : polygon 을 먼저 그려보기
+
+
+
+import matplotlib.pyplot as plt 
+plt.imshow(image1)
+plt.show()
+image1.save('1.png')
+
+
+###########################################################################
+
+
+#PIL compatible 
+#OpenSlides for whole slide images and ImageSlide for other types of images 
+slide2=openslide.open_slide('12-S -091120-1.mrxs')
+slide2.get_thumbnail((2048,2048))
+
+
+### location data text file reading ### 
+
+
+txt=open("12-S -091120-1.txt",'r',encoding='UTF-8')
+type(slide)
+
+
+
+slide.close()
+
+### ROI- annotation 을 어떻게 slide 위에 표시할 것인가??? 
+
+### read_region 으로 읽어온 데이터 사진으로 저장하기 
+image=slide.read_region(xyloc,0,(780,960))
+ 
