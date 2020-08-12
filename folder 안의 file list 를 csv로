@@ -11,3 +11,27 @@ data=file_list
 
 df=pd.DataFrame(data)
 df.to_csv("file_list.csv",header=False,index=False)
+
+
+
+# 스캔 한 파일 Excel file csv 으로 만들기 
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jul 20 09:52:15 2020
+@author: Kimeunna
+"""
+
+import os
+import pandas as pd
+
+os.chdir("/Volumes/아산  스캔 사진모음 원본/placenta_chronic_vi")
+path = "./"
+file_list = os.listdir(path)
+
+os.chdir("/Users/Kimeunna/Dropbox/아론티어/placenta_chronic_vi_project")
+data=file_list
+df=pd.DataFrame(data)
+df.to_csv("file_list.csv",header=False,index=False)
+
+
